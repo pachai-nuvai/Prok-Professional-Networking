@@ -1,40 +1,35 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 from config import Config
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
 
-# Import models
-from models.user import User, db as user_db
-from models.profile import Profile, Skill, Experience, Education, db as profile_db
-
-# Create Flask app
 app = Flask(__name__)
 app.config.from_object(Config)
 
-# Initialize extensions
 CORS(app)
+JWTManager(app)
 
-# Initialize database
-db = SQLAlchemy(app)
+# Use shared db from User model and bind to app
+from models.user import db, User  # noqa: E402
+db.init_app(app)
+
+from api import auth_bp  # noqa: E402
+app.register_blueprint(auth_bp, url_prefix='/auth')
+
 
 def setup_database():
-    """Setup database tables"""
     with app.app_context():
         db.create_all()
-        print("✅ Database tables created successfully!")
+        print("Database tables created successfully!")
 
-# Create a function to initialize the app
+
 def create_app():
-    """Application factory function"""
     return app
 
+
 if __name__ == '__main__':
-    # Setup database tables
     setup_database()
-    
-    # Run the app
-    app.run(debug=True) 
+    app.run(debug=True, port=5000)

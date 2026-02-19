@@ -6,7 +6,10 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY', 'dev')
     
     # Database
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'mysql://root:password@localhost/prok_db')
+    SQLALCHEMY_DATABASE_URI = os.environ.get(
+    'DATABASE_URL',
+    'sqlite:///prok.db'  # Use SQLite by default; set DATABASE_URL for MySQL
+)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # JWT
