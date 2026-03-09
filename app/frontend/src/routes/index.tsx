@@ -46,4 +46,8 @@ export const router = createBrowserRouter([
     path: '/messages',
     element: <MessageList />,
   },
+  {
+    path: '/feed',
+    element: <Feed />,
+  },
 ]); 
