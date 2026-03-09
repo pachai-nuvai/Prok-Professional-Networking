@@ -54,6 +54,7 @@ limiter = Limiter(
 # Importing here registers the models with the SQLAlchemy metadata.
 from models.user import db, User          # noqa: E402  (import after app creation)
 from models.profile import UserProfile    # noqa: E402
+from models.post import Post, PostLike    # noqa: E402  registers post tables with SQLAlchemy metadata
 
 # Bind SQLAlchemy to this Flask app.
 # db was created without an app in models/user.py; init_app() connects them.

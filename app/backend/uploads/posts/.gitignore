@@ -1,0 +1,9 @@
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.mp4
+*.mov
+*.webm
+*.avi git -C /home/pachaiyammal/Prok-Professional-Networking status --short
